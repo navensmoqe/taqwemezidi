@@ -1,0 +1,302 @@
+:root {
+    --primary-color: #FFD700;
+    --primary-glow: rgba(255, 215, 0, 0.4);
+    --bg-overlay: rgba(15, 23, 42, 0.82);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    /* خلفية دينية/طبيعية جميلة بتأثير معتم */
+    background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.calendar-wrapper {
+    background: var(--bg-overlay);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 950px;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    position: relative;
+}
+
+.background-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+/* حركة الشمس في الزاوية */
+.sun-icon {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 150px;
+    height: 150px;
+    opacity: 0.85;
+    animation: spin 60s linear infinite;
+    filter: drop-shadow(0 0 25px var(--primary-glow));
+}
+
+/* تصميم الكسوف */
+.eclipse-icon {
+    position: absolute;
+    top: 25%;
+    left: -20px;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle at 30% 50%, #000 0%, #000 60%, transparent 60%);
+    border-radius: 50%;
+    box-shadow: inset -15px 0 30px rgba(255, 150, 0, 0.7), -5px 0 60px rgba(255, 100, 0, 0.4);
+    opacity: 0.9;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--glass-border);
+    border-top: 4px solid var(--primary-color);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.year-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 5.5rem;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 35px var(--primary-glow);
+    letter-spacing: 5px;
+}
+
+.logo-container {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-logo {
+    max-width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.05);
+}
+
+.subtitle {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.kurmanji-title {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    opacity: 0.95;
+    letter-spacing: 1.5px;
+}
+
+.table-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    overflow-x: auto;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    text-align: right;
+}
+
+th {
+    padding: 1rem 1.2rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    white-space: nowrap;
+}
+
+td {
+    padding: 1.2rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: #e2e8f0;
+    font-size: 1.15rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+tr td:first-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-weight: 800;
+    color: #fff;
+}
+
+tr td:last-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+tr:hover td {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.past-event td {
+    opacity: 0.45;
+    transition: opacity 0.3s;
+}
+
+.past-event:hover td {
+    opacity: 0.85;
+}
+
+.upcoming-event td {
+    background: rgba(255, 215, 0, 0.15);
+    border-top: 1px solid rgba(255, 215, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.status {
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    display: inline-block;
+    text-align: center;
+    min-width: 90px;
+    letter-spacing: 0.5px;
+}
+
+.status.past {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.status.upcoming {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    animation: pulse 2s infinite;
+}
+
+.status.future {
+    background: rgba(56, 189, 248, 0.15);
+    color: #7dd3fc;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(255, 215, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+.footer-credits {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .calendar-wrapper {
+        padding: 2rem 1rem;
+    }
+
+    .main-logo {
+        max-width: 120px;
+    }
+
+    .year-title {
+        font-size: 4rem;
+    }
+
+    .subtitle {
+        font-size: 1.3rem;
+    }
+
+    th {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    td {
+        font-size: 0.95rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .eclipse-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        width: 100px;
+        height: 100px;
+    }
+}
